@@ -8,12 +8,6 @@ using UnityEngine.UI;
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
-    //public static MainManager Manager
-    //{
-    //get { return manager; }
-    //}
-
-    //public SaveData saveData;
 
     public Brick BrickPrefab;
     public int LineCount = 6;
@@ -25,8 +19,8 @@ public class MainManager : MonoBehaviour
 
     public static string playerNameStr;
     public Text playerName;
-    public static string savedPlayerNameStr;
-    public Text savedPlayerName;
+    public string savedPlayerNameStr;
+    //public Text savedPlayerName;
 
     private bool m_Started = false;
     private int m_Points;
@@ -41,14 +35,14 @@ public class MainManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        else
+        {
 
-        Instance = this;
-        //DontDestroyOnLoad(gameObject);
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);
 
-        playerName.text = "Player: " + playerNameStr;
-        //savedPlayerName.text = savedPlayerNameStr;
-        Debug.Log(savedPlayerName);
-        HighScoreText.text = $"Best Score : {savedPlayerNameStr} : {highScore}";
+        }
+
         SaveData.LoadGameData();
     }
 
@@ -56,6 +50,10 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerName.text = "Player: " + playerNameStr;
+
+        HighScoreText.text = "Best Score: " + savedPlayerNameStr + " : " + highScore.ToString();
+
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
 
@@ -116,9 +114,8 @@ public class MainManager : MonoBehaviour
         if (m_Points > highScore)
         {
             highScore = m_Points;
-
-            HighScoreText.text = $"Best Score : {playerNameStr} : {highScore}";
-            playerName = savedPlayerName;
+            HighScoreText.text = "High Score : " + playerNameStr + " : " + highScore.ToString();
+            savedPlayerNameStr = playerNameStr;
         }
     }
 }

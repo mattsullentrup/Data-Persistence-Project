@@ -15,7 +15,7 @@ public static class SaveData
         Data d = new Data();
 
         d.savedHighScore = MainManager.Instance.highScore;
-        d.savedPlayerName = MainManager.Instance.savedPlayerName;
+        d.savedPlayerName = MainManager.Instance.savedPlayerNameStr;
 
         string saveFile = JsonUtility.ToJson(d);
 
@@ -42,7 +42,7 @@ public static class SaveData
             string file = r.ReadToEnd();
             Data d = JsonUtility.FromJson<Data>(file);
             MainManager.Instance.highScore = d.savedHighScore;
-            MainManager.Instance.savedPlayerName = d.savedPlayerName;
+            MainManager.Instance.savedPlayerNameStr = d.savedPlayerName;
             r.Close();
         }
         else
@@ -53,5 +53,5 @@ public static class SaveData
 public class Data
 {
     public int savedHighScore;
-    public Text savedPlayerName;
+    public string savedPlayerName;
 }

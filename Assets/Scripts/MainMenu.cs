@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 using UnityEngine.UI;
+//[System.Serializable]
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,9 +12,9 @@ using UnityEditor;
 public class MainMenu : MonoBehaviour
 {
     public InputField playerName;
+
     public void PlayGame()
     {
-        Debug.Log("Player name is: " + playerName.text);
         MainManager.playerNameStr = playerName.text;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
